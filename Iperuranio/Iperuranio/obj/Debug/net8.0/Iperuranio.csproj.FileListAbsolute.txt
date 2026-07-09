@@ -1,0 +1,15 @@
+/home/nino/iperuranio/Iperuranio/Iperuranio/bin/Debug/net8.0/Iperuranio
+/home/nino/iperuranio/Iperuranio/Iperuranio/bin/Debug/net8.0/Iperuranio.deps.json
+/home/nino/iperuranio/Iperuranio/Iperuranio/bin/Debug/net8.0/Iperuranio.runtimeconfig.json
+/home/nino/iperuranio/Iperuranio/Iperuranio/bin/Debug/net8.0/Iperuranio.dll
+/home/nino/iperuranio/Iperuranio/Iperuranio/bin/Debug/net8.0/Iperuranio.pdb
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.GeneratedMSBuildEditorConfig.editorconfig
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.AssemblyInfoInputs.cache
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.AssemblyInfo.cs
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.csproj.CoreCompileInputs.cache
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.sourcelink.json
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.dll
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/refint/Iperuranio.dll
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.pdb
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/Iperuranio.genruntimeconfig.cache
+/home/nino/iperuranio/Iperuranio/Iperuranio/obj/Debug/net8.0/ref/Iperuranio.dll
