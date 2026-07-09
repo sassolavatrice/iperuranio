@@ -146,7 +146,7 @@ namespace Gioco
 						{
 								anagramma += letter;
 						}
-						anagramma += $"\t-\t{Description}";
+						anagramma += $"  [{Description}]";
 						return anagramma;
 				}
 		  }

@@ -192,19 +192,19 @@
     ]
   },
   "packageFolders": {
-    "/home/nino/.nuget/packages/": {}
+    "/home/tommaso/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/nino/iperuranio/Iperuranio/Iperuranio/Iperuranio.csproj",
+      "projectUniqueName": "/home/tommaso/.ssh/iperuranio/Iperuranio/Iperuranio/Iperuranio.csproj",
       "projectName": "Iperuranio",
-      "projectPath": "/home/nino/iperuranio/Iperuranio/Iperuranio/Iperuranio.csproj",
-      "packagesPath": "/home/nino/.nuget/packages/",
-      "outputPath": "/home/nino/iperuranio/Iperuranio/Iperuranio/obj/",
+      "projectPath": "/home/tommaso/.ssh/iperuranio/Iperuranio/Iperuranio/Iperuranio.csproj",
+      "packagesPath": "/home/tommaso/.nuget/packages/",
+      "outputPath": "/home/tommaso/.ssh/iperuranio/Iperuranio/Iperuranio/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/nino/.nuget/NuGet/NuGet.Config"
+        "/home/tommaso/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -256,7 +256,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.109/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.108/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
