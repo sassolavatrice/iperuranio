@@ -2,15 +2,17 @@ namespace Gioco;
 
 public static class Interface
 {
-  static public bool enoughResolution()
-  {
-	height = Console.WindowHeight;
-	width = Console.WindowWidth;
-	if(height < 20 || width < 40)
-      return false;
-	else
-      return true;
-  }
+//  static public bool enoughResolution()
+//  {
+//	if(height < 20 || width < 40)
+//	{
+//      return false;
+//	}
+//	else
+//	{
+//      return true;
+//	}
+//}
   static public void roomVisualization()
   {
    //display room specs 
