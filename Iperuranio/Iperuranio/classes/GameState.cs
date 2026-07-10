@@ -5,7 +5,7 @@ class GameState
   public List<Room> Rooms = new List<Room>();
   public Room? currentRoom {get;set;}
   public MainCharacter mainCharacter {get;set;}
-  public Libro mioLibro {get;set;}
+  public Book book {get;set;}
 
   public void MoveTo(string direction)
   {

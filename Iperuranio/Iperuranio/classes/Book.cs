@@ -1,17 +1,17 @@
 namespace Gioco
 {
-		public class Libro : Item
+		public class Book
 		{
-				public Dictionary<Anagram,bool> Indovinelli {get; set;}
+				public Dictionary<Item,bool> Indovinelli {get; set;}
 
-				public Libro()
+				public Book()
 				{
-						Indovinelli = new Dictionary<Anagram,bool>();		
+						Indovinelli = new Dictionary<Item,bool>();		
 				}
 
-				public void AggiungiIndovinello(Anagram anagramma) 
+				public void AggiungiIndovinello(Item indovinello) 
 				{
-						Indovinelli.Add(anagramma,false); 
+						Indovinelli.Add(indovinello,false); 
 				}
 
 				public override string ToString()

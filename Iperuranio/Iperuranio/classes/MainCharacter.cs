@@ -59,12 +59,11 @@ class MainCharacter
 
   public void Risolvi(string anagramma)
   {
-				Console.WriteLine("lookin for anagrams:");
-		foreach(Anagram anagram in _currentRoom.Items)
+		foreach(Item item in _currentRoom.Items)
 		{
-				if(new string(anagram.Grid).Equals(anagramma))
+				if( (item.anagram != null) && (new string(item.anagram.Grid).Equals(anagramma)))
 				{
-						anagram.SolveAnagram();
+						item.anagram.SolveAnagram();
 				}
 		}
   }

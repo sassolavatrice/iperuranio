@@ -2,33 +2,32 @@ using Spectre.Console;
 
 namespace Gioco
 {
-		public class Anagram : Item
+		public class Anagram
 		{
-		  
+		  public string Solution {get;set;}
 		  public char[] Grid {get;set;}
 		  int x=0;
 		  char currentchar=' ';
+		  bool solved = false;
 
-		  public Anagram(string solution, string description)
+		  public Anagram(string solution)
 		  {
-				Description = description;
-				Name = solution;
-				Weigth = Int32.MaxValue;
-				Grid = new char[Name.Length];
-				char[] shuffledWord = ShuffleLetters();
-			  for(int i=0;i<Name.Length;i++)
+				Solution = solution;
+				Grid = new char[solution.Length];
+				char[] shuffledWord = ShuffleLetters(Solution);
+			  for(int i=0;i<solution.Length;i++)
 				{
 					Grid[i] = shuffledWord[i];
 				}
 		  }
 
-		  private char[] ShuffleLetters()
+		  private char[] ShuffleLetters(string word)
 		  {
 				  Random r = new Random();
-				char[] shuffle = new char[Name.Length];
-				  for(int i= 0; i<Name.Length; i++)
+				char[] shuffle = new char[word.Length];
+				  for(int i= 0; i<word.Length; i++)
 				  {
-						shuffle[i] = Name[i];
+						shuffle[i] = Solution[i];
 				  }
 				r.Shuffle(shuffle);
 				return shuffle;
@@ -41,17 +40,16 @@ namespace Gioco
 			  {	
 					  notEqual = false;
 				  Console.Clear();
-				  Console.WriteLine(Description);
-					  for(int i=0; i<Name.Length;++i)
+					  for(int i=0; i<Solution.Length;++i)
 					  {
-						if(Grid[i] != Name[i]) 
+						if(Grid[i] != Solution[i]) 
 						{
 								notEqual = true;
 						}
 					  }
 				  Console.Write("\n");
 				  Console.WriteLine("x:"+x+" y:"+" char:"+currentchar+"\n");
-					  for(int i=0;i<Name.Length;i++)
+					  for(int i=0;i<Solution.Length;i++)
 					  { 
 						if(x==i)
 						{
@@ -66,7 +64,7 @@ namespace Gioco
 						}
 						
 					  }
-				  ConsoleKeyInfo c=Console.ReadKey(); 
+				  ConsoleKeyInfo c=Console.ReadKey(true);
 				  switch(c.Key)
 					{
 					  case ConsoleKey.A:
@@ -74,16 +72,16 @@ namespace Gioco
 						  if(x>0)
 						  {x--;
 								  break;}
-						  if(x==0)x=Name.Length-1;
+						  if(x==0)x=Solution.Length-1;
 						  break;
 					  }
 					  case ConsoleKey.D:
 					  {
-						  if(x==Name.Length-1)
+						  if(x==Solution.Length-1)
 						  {x=0;
 								break;
 						  }
-						  if(x<Name.Length)
+						  if(x<Solution.Length)
 						  {x++;
 								  break;}
 						  break;
@@ -119,18 +117,17 @@ namespace Gioco
 					  }
 					  default:
 					  {
-					  Console.WriteLine("Tasto non riconosciuto");
 					  break;
 					  }
 					}
 				  }
+				  solved = true;
 				  AnsiConsole.Status()
 				  .Spinner(Spinner.Known.FistBump)
 				  .Start("RISOLTO",ctx =>
 				  {
 					Task.Delay(2000).Wait();
 				  });
-		  
 						Console.WriteLine("Complimenti hai risolto l'anagramma!");
 						Console.WriteLine("Premi Enter per uscire");
 						while(Console.ReadKey().Key != ConsoleKey.Enter)
@@ -139,15 +136,15 @@ namespace Gioco
 						}
 						Console.Clear();
 			  }
-				public override string ToString()
-				{
-						string anagramma = "";
-						foreach(char letter in Grid)
-						{
-								anagramma += letter;
-						}
-						anagramma += $"  [{Description}]";
-						return anagramma;
-				}
+				//public override string ToString()
+				//{
+				//		string anagramma = "";
+				//		foreach(char letter in Grid)
+				//		{
+				//				anagramma += letter;
+				//		}
+				//		anagramma += $"  [{Description}]";
+				//		return anagramma;
+				//}
 		  }
 }
