@@ -38,4 +38,18 @@ public class GameState
     currentRoom.Items.Add(toPutDown);
     }
   }
+
+  public void Teletrasporto(string Destinazione)
+  {
+    Room stanzadiarrivo = Rooms.Find(y=>y.Name == Destinazione);
+    if(stanzadiarrivo != null)
+    {
+      currentRoom = stanzadiarrivo;
+      mainCharacter._currentRoom = currentRoom;
+    }
+    else
+    {
+      Console.WriteLine("non esiste");
+    }
+  }
 }

@@ -45,6 +45,11 @@ static class GameShell
      case "raccogli":
         gameState.PickUp(arguments[1]);
         break;
+      case "teletrasporto":
+      Console.WriteLine("dove andiumo di bello?");
+      string x= Console.ReadLine();
+      gameState.Teletrasporto(x);
+      break;
 	 case "molla":
         gameState.putDown(arguments[1]);
 		break;
