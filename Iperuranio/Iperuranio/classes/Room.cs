@@ -1,6 +1,6 @@
 namespace Gioco;
 
-class Room
+public class Room
 {
   private string? _name;
   public string Name

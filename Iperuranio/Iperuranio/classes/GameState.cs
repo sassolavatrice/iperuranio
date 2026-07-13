@@ -1,6 +1,6 @@
 namespace Gioco;
 
-class GameState
+public class GameState
 {
   public List<Room> Rooms = new List<Room>();
   public Room? currentRoom {get;set;}

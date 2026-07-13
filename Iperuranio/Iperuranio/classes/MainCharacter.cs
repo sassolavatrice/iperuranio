@@ -1,6 +1,6 @@
 namespace Gioco;
 
-class MainCharacter
+public class MainCharacter
 {
   public string Name {get;set;}
   public Stack<Item> Inventory {get;set;}
