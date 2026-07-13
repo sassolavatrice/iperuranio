@@ -2,6 +2,7 @@ namespace Gioco;
 
 public static class Interface
 {
+
 //  static public bool enoughResolution()
 //  {
 //	if(height < 20 || width < 40)
@@ -15,7 +16,7 @@ public static class Interface
 //}
   static public void roomVisualization()
   {
-   //display room specs 
+
   }
   
   static public void edgeWindow(List<string> list,int mode)

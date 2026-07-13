@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Iperuranio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9acee623f3d3f7dc1b9607fd18b7a78e3511de90")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+696c086c2f08a03b2743b8686e65e7bc0dbfc6d7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Iperuranio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Iperuranio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
