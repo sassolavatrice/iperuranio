@@ -7,10 +7,14 @@ static public class Helper
   static bool visible = true;
   static public void Display()
   {
-    if (visible) Interface.edgeWindow(Helper.allCommands, 1);
+	using (new Interface.CursorScope())
+	{
+	  if (visible) Interface.edgeWindow(Helper.allCommands, 1);
+	}
   }
   static public void Switch()
   {
     visible = !visible;
+	//Console.Clear();
   }
 }

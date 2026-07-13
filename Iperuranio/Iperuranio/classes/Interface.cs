@@ -2,6 +2,17 @@ namespace Gioco;
 
 public static class Interface
 {
+  public readonly struct CursorScope : IDisposable
+  {
+	private readonly int _left, _top;
+
+	public CursorScope()
+	{
+		(_left, _top) = Console.GetCursorPosition();
+	}
+
+	public void Dispose() => Console.SetCursorPosition(_left, _top);
+  }
 
 //  static public bool enoughResolution()
 //  {
@@ -14,10 +25,6 @@ public static class Interface
 //      return true;
 //	}
 //}
-  static public void roomVisualization()
-  {
-
-  }
   
   static public void edgeWindow(List<string> list,int mode)
   {

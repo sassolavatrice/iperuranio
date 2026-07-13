@@ -6,7 +6,7 @@ static class GameShell
   public static void getCommand(GameState gameState)
   {
     
-    Console.WriteLine("\n\n\n\nInserisci un comando");
+    Console.WriteLine("Inserisci un comando");
     
     string command = Console.ReadLine().Trim();
 	string[] arguments = new string[10];
