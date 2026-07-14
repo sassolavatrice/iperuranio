@@ -45,13 +45,13 @@ static public class Program
     NPC VanGogh = new NPC("Van Gogh", "ma non era morto???");
     NPC Unicorno = new NPC("Unicorno ", "ma quindi esistono??!");
     Tile a = new Tile('a');
-    Debris barra = new Debris('\\');
+    //Debris barra = new Debris('\\');
 
     // aggiungo oggetti nella stanza
     gameState.Rooms[0].addItem(tutorial);
     gameState.Rooms[0].addItem(Cane);
     gameState.Rooms[1].addItem(Baforb);
-    gameState.Rooms[1].addItem(barra);
+    //gameState.Rooms[1].addItem(barra);
     gameState.Rooms[2].addItem(clamidia);
     gameState.Rooms[2].addItem(gonorrea);
     gameState.Rooms[3].addItem(VanGogh);
@@ -90,6 +90,7 @@ static public class Program
       Console.WriteLine(gameState.currentRoom.Name);
       Console.WriteLine(gameState.currentRoom.Description);
       gameState.currentRoom.PrintItems();
+	  Helper.Reload(gameState);
       Helper.Display();
       GameShell.getCommand(gameState);
     }

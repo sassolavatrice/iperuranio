@@ -8,7 +8,7 @@ namespace Gioco
 		  public char[] Grid {get;set;}
 		  int x=0;
 		  char currentchar=' ';
-		  bool solved = false;
+		  public bool solved = false;
 
 		  public Anagram(string solution)
 		  {

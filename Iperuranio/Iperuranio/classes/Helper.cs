@@ -2,19 +2,44 @@ namespace Gioco;
 
 static public class Helper
 {
-  static public List<string> allCommands = new List<string>{"vai","inventario","raccogli"};
-  static public List<string> availableCommands = new List<string>();
+  static public List<string> mainCommands = new List<string>{"menu","esci"};
+  static public List<string> allCommands = new List<string>();
   static bool visible = true;
+  static int Width = 0;
   static public void Display()
   {
-	using (new Interface.CursorScope())
+	using (new Layout.CursorScope())
 	{
-	  if (visible) Interface.edgeWindow(Helper.allCommands, 1);
+	  if (visible) Layout.edgeWindow(Helper.allCommands, 1, out Width);
 	}
   }
   static public void Switch()
   {
     visible = !visible;
 	//Console.Clear();
+  }
+  public static void Reload(GameState gameState)
+  {
+	allCommands.Clear();
+	foreach(string dirs in gameState.currentRoom.directions.Keys)
+	{
+	  allCommands.Add("vai " + dirs);
+	}
+	foreach(Item item in gameState.currentRoom.Items)
+	{
+	  allCommands.Add("focalizza " + new string(item.anagram.Grid));
+	}
+	  foreach(string str in allCommands) if(str.Length > Width) Width=str.Length;
+	  char[] separator = new char[Width];
+	  for(int i = 0; i < Width; i++)
+	  {
+		separator[i] = '-';
+	  }
+	  allCommands.Add(new string(separator));
+
+	foreach(string command in mainCommands)
+	{
+	  allCommands.Add(command);
+	}
   }
 }

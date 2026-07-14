@@ -1,6 +1,6 @@
 namespace Gioco;
 
-public static class Interface
+public static class Layout
 {
   public readonly struct CursorScope : IDisposable
   {
@@ -26,34 +26,29 @@ public static class Interface
 //	}
 //}
   
-  static public void edgeWindow(List<string> list,int mode)
+  static public void edgeWindow(List<string> list,int mode, out int width)
   {
-
-	int i=0;
+	width = 0;
 	int height = 0;
 	switch (mode)
     {
       case 1:
-			  foreach(string str in list) if(str.Length>i)i=str.Length;
-    
-			  Console.SetCursorPosition(Console.WindowWidth-i-8,height);
-			  height++;
+			  foreach(string str in list) if(str.Length > width) width=str.Length;
+			  Console.SetCursorPosition(Console.WindowWidth - width -8, height++);
 			  Console.Write("╔");
-			  for(int j=0;j<i+2;j++) Console.Write("═");
+			  for(int j=0;j<width+2;j++) Console.Write("═");
 			  Console.Write("╗\n"); 
     
 			  foreach(string str in list)
 			  {
-				Console.SetCursorPosition(Console.WindowWidth-i-8,height);
-				height++;
-				Console.Write("║ "+str);
-				for(int j=0;j<i-str.Length;j++) Console.Write(" ");
+				Console.SetCursorPosition(Console.WindowWidth - width - 8, height++);
+				Console.Write("║ " + str);
+				for(int j=0;j<width-str.Length;j++) Console.Write(" ");
 				Console.Write(" ║\n");
 			  }
-			  Console.SetCursorPosition(Console.WindowWidth-i-8,height);
-			  height++;
+			  Console.SetCursorPosition(Console.WindowWidth - width - 8, height);
 			  Console.Write("╚");
-			  for(int j=0;j<i+2;j++) Console.Write("═");
+			  for(int j=0;j<width+2;j++) Console.Write("═");
 			  Console.Write("╝\n"); 
 			  break;
 

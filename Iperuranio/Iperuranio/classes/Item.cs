@@ -4,6 +4,7 @@ public class Item
 {
   public string Name {get;set;}
   public string Description {get;set;}
+  public string Tip {get;set;}
   public int? Weigth {get;set;}
   public Anagram anagram {get;set;}
 
@@ -15,18 +16,23 @@ public class Item
     Description = description;
 	Weigth = weigth;
 	anagram = new Anagram(Name);
+	Tip = "Messaggio dopo aver risolto";
   }
 
   public override string ToString()
   {
-		  if(anagram != null)
+		  if(anagram == null)
 		  {
-    string display = new string(anagram.Grid); 
-      return $"> {display} - [{Description}]";
+            return $"> {Name} - [{Description}]";
+		  }
+		  else if(anagram.solved)
+		  {
+            return $"> {Name} - [{Tip}]";
 		  }
 		  else
 		  {
-      return $"> {Name} - [{Description}]";
+			string display = new string(anagram.Grid); 
+			return $"> {display} - [{Description}]";
 		  }
   }
 }
