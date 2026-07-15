@@ -7,6 +7,8 @@ public class GameState
   public MainCharacter mainCharacter {get;set;}
   public Book book {get;set;}
 
+ 
+
   public void MoveTo(string direction)
   {
     if(currentRoom.directions.ContainsKey(direction))

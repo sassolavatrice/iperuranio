@@ -35,8 +35,15 @@ static public class Program
    
 
     // creo oggetti
-    Baforb baforb = new Baforb(gameState);
+    NPC npc = new NPC("Baforb", "un tipico fabBro", 100);
+    gameState.Rooms[0].addItem(npc);
     Tile a = new Tile('a');
+
+    NPC npc2 = new NPC("Smigol", "ahaahhahahhahah", Int32.MaxValue);
+    gameState.Rooms[4].addItem(npc2);
+   
+   
+    
     //Debris barra = new Debris('\\');
 
     // aggiungo oggetti nella stanza
@@ -53,6 +60,7 @@ static public class Program
     // aggiungo personaggio e lo posiziono nella prima
     gameState.currentRoom = gameState.Rooms[0];
     gameState.mainCharacter = new MainCharacter(gameState.currentRoom);
+
 
     //DialogNode dialognode1 = new DialogNode();
     //dialognode1.Phrase = "ciao come va? \n0)bene \n1)male";

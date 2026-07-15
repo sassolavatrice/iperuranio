@@ -37,7 +37,9 @@ static class GameShell
           default:
             Console.WriteLine("Non c'è questa direzione");
             break;
+            
         }
+      NPC.tpsmigol(gameState.Rooms);
         break;
      case "inventario":
 		gameState.mainCharacter.InteractInventory();
@@ -108,5 +110,7 @@ static class GameShell
         Console.WriteLine("Comando non riconosciuto");
         break;
      }
+     
     }
+    
 }

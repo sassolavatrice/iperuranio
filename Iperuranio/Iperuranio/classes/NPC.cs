@@ -1,30 +1,24 @@
 namespace Gioco;
 
-public class Baforb : Item 
+public class NPC : Item
 {
-  public Room CurrentRoom {get;set;} 
-
-  public Baforb(GameState gameState)
+  static public Room CurrentRoom{get;set;}
+ 
+  public NPC(string name, string description, int weigth)
   {
-    Name = "Baforb";
-    Description = "un tipico Fabbro";
-	CurrentRoom = gameState.Rooms[0];
-    Weigth = 100;
-    anagram = null;
+    Name = name;
+    Description = description;
+    Weigth = weigth;
+    this.anagram = new Anagram(name);
   }
+ 
 
-
-}
-public class Smeagol : Item
-{
-  public Room CurrentRoom {get;set;}
-
-  public Smeagol(GameState gameState)
+static public void tpsmigol(List<Room> rooms)
   {
-	Name = "Smeagol";
-	Description = "Hahahahhahah";
-	CurrentRoom = gameState.Rooms.Last();
-	Weigth = Int32.MaxValue;
-	anagram = null;
+     Random smigolseed = new Random();
+
+    int x = smigolseed.Next(rooms.Count);
+    Room y = rooms[x];
+    CurrentRoom = y;
   }
 }
