@@ -7,21 +7,16 @@ static public class Program
   {
     GameState gameState = new GameState();
 
-    Item gonorrea = new Item("gonorrea", "malattia venerea, tranquilla nel complesso");
-    Item clamidia = new Item("clamidia", "bubboni sulla minchia, peso zio");
-    Item HIV = new Item("HIV", "il più grande spettacolo dopo il big bang");
     Item tutorial = new Item("Tutorial", "seleziona la lettera, spostala e risolvi questo anagramma");
-    Item blu = new Item("blu", "Nel ... dipinto di ...");
-    Item bianco = new Item("bianco", "Siamo sicuri sia un colore?");
-    Item petrolio = new Item("petrolio", "Sfumatura di verde, piace agli Stati Uniti");
-    Item fieno = new Item("fieno", "lo mangiano i cavalli");
-    Item cowboy = new Item("cowboy", "YEEEEEEHAAAW");
+    //Item blu = new Item("blu", "Nel ... dipinto di ...");
+    //Item bianco = new Item("bianco", "Siamo sicuri sia un colore?");
+    //Item petrolio = new Item("petrolio", "Sfumatura di verde, piace agli Stati Uniti");
+    //Item fieno = new Item("fieno", "lo mangiano i cavalli");
+    //Item cowboy = new Item("cowboy", "YEEEEEEHAAAW");
 
 
 
     gameState.book = new Book();
-    gameState.book.AggiungiIndovinello(clamidia);
-    gameState.book.AggiungiIndovinello(HIV);
 
     gameState.Rooms.Add(new Room("???????????", "Dove sono?"));
     gameState.Rooms.Add(new Room("Gattabuia", "Sei circondato da mattonelle e sbare e metallo"));
@@ -40,27 +35,17 @@ static public class Program
    
 
     // creo oggetti
-    NPC Baforb = new NPC("Baforb", "un tipico fabBro");
-    NPC Cane = new NPC("Cane", "un cane guida, hai bisogno di \"aiuto\"?");
-    NPC VanGogh = new NPC("Van Gogh", "ma non era morto???");
-    NPC Unicorno = new NPC("Unicorno ", "ma quindi esistono??!");
+    Baforb baforb = new Baforb(gameState);
     Tile a = new Tile('a');
     //Debris barra = new Debris('\\');
 
     // aggiungo oggetti nella stanza
     gameState.Rooms[0].addItem(tutorial);
-    gameState.Rooms[0].addItem(Cane);
-    gameState.Rooms[1].addItem(Baforb);
     //gameState.Rooms[1].addItem(barra);
-    gameState.Rooms[2].addItem(clamidia);
-    gameState.Rooms[2].addItem(gonorrea);
-    gameState.Rooms[3].addItem(VanGogh);
-    gameState.Rooms[3].addItem(blu);
-    gameState.Rooms[3].addItem(bianco);
-    gameState.Rooms[3].addItem(petrolio);
-    gameState.Rooms[4].addItem(Unicorno);
-    gameState.Rooms[4].addItem(fieno);
-    gameState.Rooms[4].addItem(cowboy);
+    //gameState.Rooms[3].addItem(bianco);
+    //gameState.Rooms[3].addItem(petrolio);
+    //gameState.Rooms[4].addItem(fieno);
+    //gameState.Rooms[4].addItem(cowboy);
 
 
 
@@ -92,6 +77,7 @@ static public class Program
       gameState.currentRoom.PrintItems();
 	  Helper.Reload(gameState);
       Helper.Display();
+	  if(endGame = Anagram.CheckForWin()) break;
       GameShell.getCommand(gameState);
     }
   }

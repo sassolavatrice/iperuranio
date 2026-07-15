@@ -4,6 +4,8 @@ namespace Gioco
 {
 		public class Anagram
 		{
+		  static public int anagramCount = 0;
+		  static public int solvedAnagramCount = 0;
 		  public string Solution {get;set;}
 		  public char[] Grid {get;set;}
 		  int x=0;
@@ -12,6 +14,7 @@ namespace Gioco
 
 		  public Anagram(string solution)
 		  {
+				anagramCount++;
 				Solution = solution;
 				Grid = new char[solution.Length];
 				char[] shuffledWord = ShuffleLetters(Solution);
@@ -122,6 +125,8 @@ namespace Gioco
 					}
 				  }
 				  solved = true;
+				  solvedAnagramCount++;
+				  Console.WriteLine($"Progresso:{solvedAnagramCount}");
 				  AnsiConsole.Status()
 				  .Spinner(Spinner.Known.FistBump)
 				  .Start("RISOLTO",ctx =>
@@ -136,15 +141,16 @@ namespace Gioco
 						}
 						Console.Clear();
 			  }
-				//public override string ToString()
-				//{
-				//		string anagramma = "";
-				//		foreach(char letter in Grid)
-				//		{
-				//				anagramma += letter;
-				//		}
-				//		anagramma += $"  [{Description}]";
-				//		return anagramma;
-				//}
-		  }
+	public static bool CheckForWin()
+	{
+	  if(anagramCount == solvedAnagramCount)
+	  {
+	  Console.Clear();
+	  Console.WriteLine("Hai risolto tutti gli anagrammi!");
+	  Console.WriteLine("Premi qualsiasi tasto per tornare alla schermata principale");
+	  Console.ReadKey();
+	  return true;
+	  }else{return false;}
+	}
+  }
 }
