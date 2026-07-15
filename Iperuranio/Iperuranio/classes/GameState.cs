@@ -27,8 +27,8 @@ public class GameState
     Item toPickUp = currentRoom.Items.Find(x => x.Name== nameItem);
     if(toPickUp != null)
     {
-    currentRoom.Items.Remove(toPickUp);
-    mainCharacter.Inventory.Push(toPickUp);
+	  currentRoom.Items.Remove(toPickUp);
+	  mainCharacter.Inventory.Push(toPickUp);
     }
   }
   public void putDown(string nameItem)

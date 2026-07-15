@@ -7,16 +7,10 @@ static class GameShell
   {
     
     Console.WriteLine("Inserisci un comando");
-    
-    string command = Console.ReadLine().Trim();
-	string[] arguments = new string[10];
-		int i = 0;
-	foreach(string arg in command.Split())
-	{
-			arguments[i] = arg;
-		  i++;
-	}
-	
+   string[] arguments = null;
+   do{ 
+    arguments = Console.ReadLine().Trim().Split();
+   }while (arguments != null);
     switch (arguments[0])
     {
      case "vai":

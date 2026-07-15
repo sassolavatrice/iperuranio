@@ -1,116 +1,98 @@
 namespace Gioco
 {
-    internal class GameEngine
-    {
-        public Dictionary<string,string> LoginTable{get;set;}
-        string currentplayer;
-        GameState gameState;
-        public GameEngine()
+   public class GameEngine
+    { 
+        public static GameState gameState {get;set;}
+		public static Dictionary<string,int> loginTable {get;set;}
+
+		public GameEngine()
+		{
+		  loginTable = SaveLoadManager.LoadLoginTable();
+		  while(Authentication(out int id));
+		  gameState = SaveLoadManager.LoadGame(id);
+		}
+
+        public static bool Authentication(out int ID)
         {
-            LogFileManager.Write("application start");
-        }
-        public void Init()
-        {
-            LogFileManager.Write("init");
-            LoginTable = SaveLoadManager.LoadLoginTable();
-            Console.WriteLine("welcome to the game write help for list of commands");            
-        }
-        public void CloseGame()
-        {
-            LogFileManager.Write("close game");
-        }
-        public string CommandParser(string[] arguments)
-        {
-            if (arguments[0]==null)
-            {
-                return null;
-            }
+			 Console.WriteLine("Enter username: ");
+			 string[] arguments = null;
+			  arguments = Console.ReadLine().Trim().Split();
             switch (arguments[0].ToLower())
             {            
-                case "newg":
-                    if(arguments.Length<4)
-                    {
-                        Console.WriteLine("invalid number of arguments");
-                        break;
-                    }
-                    else
-                   {
-                        NewGameProcedure(arguments[1],arguments[2],arguments[3]);
-                        break;
-                    }
-                case "resg":
-                    if(arguments.Length<3)
-                    {
-                        Console.WriteLine("invalid number of arguments");
-                        break;
-                    }
-                    else if(ResumeGameProcedure(arguments[1],arguments[2])=="startgame")
-                    {
-                        //StartGame();
-							Console.WriteLine("starting the game!");
-                        break;
-                    }
-                    break;
-                case "delete":
-                    if(arguments.Length<3)
-                    {
-                        Console.WriteLine("invalid number of arguments");
-                        break;
-                    }else
-                    {
-                        if(LoginTable.ContainsKey(arguments[1]) && LoginTable[arguments[1]]==arguments[2])
-                        {
-                            LoginTable.Remove(arguments[1]);
-                            Console.WriteLine("account deleted");
-                            LogFileManager.Write("account "+arguments[1]+" deleted");
-                        }
-                        else
-                        {
-                            Console.WriteLine("invalid credentials");
-                        }
-                        break;
-                    }
-                case "exit":
-                    Console.WriteLine("Goodbye");
-                    return "exit";
-                case "help":
-                Console.WriteLine("newg<nickname><password><password> to create new user\n"+
-                                               "resg<nickname><password> to login\n"+
-                                               "delete<nickname><password> to delete user\n"+
-                                               "exit");
-                                               break;
-                //case "startgame":{return "startgame";}
-                default:
-                Console.WriteLine("try to write help");
-                 break;
+			  case "aiuto":
+                Console.WriteLine("\"add\" <nickname> to create save slot\n"+
+											   "\"resume\" <nickname> to resume\n"+
+                                               "\"exit\" to leave");
+				return true;
+			  case "add":
+				loginTable.Add(arguments[1],);
+				return false;
+				case "resume"
+				
+			  case "esci":
+				return false;
+			  default:
+				Console.WriteLine("comando non riconosciuto");
+				return true;
             }
-            return null;
+		  }
+		public static QuitGame()
+		{
+		  SaveLoadManager.SaveGame(GameEngine.gameState, GameEngine.id);
+		  Program.endGame = true;
+		}
+
+		public static GameState GenerateNewGame()
+		{
+		  GameState gameState = new GameState();
+    //Item blu = new Item("blu", "Nel ... dipinto di ...");
+    //Item bianco = new Item("bianco", "Siamo sicuri sia un colore?");
+    //Item petrolio = new Item("petrolio", "Sfumatura di verde, piace agli Stati Uniti");
+    //Item fieno = new Item("fieno", "lo mangiano i cavalli");
+    //Item cowboy = new Item("cowboy", "YEEEEEEHAAAW");
+
+    gameState.book = new Book();
+
+    gameState.Rooms.Add(new Room("???????????", "Dove sono?"));
+    gameState.Rooms.Add(new Room("Gattabuia", "Sei circondato da mattonelle e sbare e metallo"));
+    gameState.Rooms.Add(new Room("Gattahiara", "Sei circondato da mattoni e sbarre di metallo"));
+    gameState.Rooms.Add(new Room("Tavolozza", "È tutto così....colorato"));//blu nel ... dipinto di ... bianco siamo sicuri sia un colore,petrolio sfumatura di verde, piace agli stati uniti
+    gameState.Rooms.Add(new Room("Stalla", "Cavalli, ma non solo"));//fieno lo mangiano i cavalli, ferro quello di cavallo porta fortuna, cowboy yeehaw
+
+    gameState.Rooms[0].addExit("nord", gameState.Rooms[1]);
+    gameState.Rooms[1].addExit("sud", gameState.Rooms[0]);
+    gameState.Rooms[1].addExit("nord", gameState.Rooms[2]);
+    gameState.Rooms[2].addExit("sud", gameState.Rooms[1]);
+    gameState.Rooms[2].addExit("est",gameState.Rooms[3]);
+    gameState.Rooms[3].addExit("ovest",gameState.Rooms[2]);
+    gameState.Rooms[3].addExit("sud",gameState.Rooms[4]);
+    gameState.Rooms[4].addExit("ovest",gameState.Rooms[3]);
+   
+
+    // creo oggetti
+    Baforb baforb = new Baforb(gameState);
+    Tile a = new Tile('a');
+    //Debris barra = new Debris('\\');
+
+    // aggiungo oggetti nella stanza
+    gameState.Rooms[0].addItem(new Item("Tutorial", "seleziona la lettera, spostala e risolvi questo anagramma"));
+    //gameState.Rooms[1].addItem(barra);
+    //gameState.Rooms[3].addItem(bianco);
+    //gameState.Rooms[3].addItem(petrolio);
+    //gameState.Rooms[4].addItem(fieno);
+    //gameState.Rooms[4].addItem(cowboy);
+
+
+
+
+    // aggiungo personaggio e lo posiziono nella prima
+    gameState.currentRoom = gameState.Rooms[0];
+    gameState.mainCharacter = new MainCharacter(gameState.currentRoom);
+	return gameState;
         }
-        void NewGameProcedure(string name,string password1,string password2)
-        {
-            LogFileManager.Write("new game procedure");
-            if(LoginTable==null)LoginTable=new Dictionary<string, string>();
-            if(LoginTable.ContainsKey(name)){Console.WriteLine("name already exist");return;}
-            if(password1!=password2){Console.WriteLine("password doesnt match please try again"); return;}
-            if(password1==password2)LoginTable.Add(name,password1);
-            LogFileManager.Write("new game completed");
-            Console.WriteLine("New game created "+name);
-        }
-        string ResumeGameProcedure(string name,string password)
-        {
-            LogFileManager.Write("resume game procedure");
-            if(LoginTable==null){Console.WriteLine("no login available"); return null;}
-            if(!LoginTable.ContainsKey(name)){Console.WriteLine("no account available for "+name+"try newg<nickname><password><password>"); return null;}
-            if(LoginTable[name]!=password){Console.WriteLine("wrong password try again"); return null;}
-            if(LoginTable[name]==password){Console.WriteLine("welcome back "+name); currentplayer=name; return "startgame";}
-            return null;
-        }   
-        //void StartGame()
-        //{
-        //    gameState = SaveLoadManager.LoadGame(currentplayer);
-        //    motoreGioco.elaboraComando(gameState);
-        //    Console.Clear();
-        //    Console.WriteLine("menu");
-        //}
-    }
+	public static void StartGame()
+	{
+	  Console.WriteLine("avviamento gioco...");
+	}  
+  }
 }

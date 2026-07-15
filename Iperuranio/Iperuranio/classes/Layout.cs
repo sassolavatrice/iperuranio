@@ -1,4 +1,5 @@
 namespace Gioco;
+using Spectre.Console;
 
 public static class Layout
 {
@@ -14,6 +15,14 @@ public static class Layout
 	public void Dispose() => Console.SetCursorPosition(_left, _top);
   }
 
+ public static string ShowMenu()
+ {
+  string nextPage = AnsiConsole.Prompt(
+	  new SelectionPrompt<string>()
+	  .Title("Cegimonoo")
+	  .AddChoices("New Game", "Resume", "Exit"));
+  return nextPage;
+  }
 //  static public bool enoughResolution()
 //  {
 //	if(height < 20 || width < 40)

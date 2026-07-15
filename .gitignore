@@ -1,3 +1,4 @@
-Iperuranio/Iperuranio/bin/*
-Iperuranio/Iperuranio/obj/*
+Iperuranio/Iperuranio/bin
+Iperuranio/Iperuranio/obj
+Iperuranio/Iperuranio/logs
 Iperuranio/PlayGround

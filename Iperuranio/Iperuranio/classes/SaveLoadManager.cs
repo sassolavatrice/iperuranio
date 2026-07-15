@@ -4,26 +4,30 @@ namespace Gioco
 {
     static class SaveLoadManager
     {
-        public static void SaveGame(GameState savefile,string name)
+	  const string LTPath = @"LoginTable.txt";
+      const string SavePath= @"save/.";
+	  
+        public static void SaveGame(GameState gameState,int id)
         {
-            string filename="SaveFiles\\"+name+".txt";
-            File.WriteAllText(filename,JsonSerializer.Serialize(savefile));
-            LogFileManager.Write("saved game file ");
+            File.WriteAllText(SavePath + id.ToString(),JsonSerializer.Serialize(gameState));
         }
 
-        public static GameState LoadGame(string name)
+        public static GameState LoadGame(int id)
         {
-            string filename="SaveFiles\\"+name+".txt";
-            LogFileManager.Write("Load game");
-            //if(!File.Exists(filename))return GenerateNewGame();
-            return JsonSerializer.Deserialize<GameState>(File.ReadAllText(filename));
+            if(!File.Exists(SavePath + id.ToString()))
+			{
+			  return GameEngine.GenerateNewGame();
+			}
+            return JsonSerializer.Deserialize<GameState>(File.ReadAllText(SavePath + id.ToString()));
         }
 
-        public static Dictionary<string,string> LoadLoginTable()
+        public static Dictionary<string,int> LoadLoginTable()
         {
-            LogFileManager.Write("load login table");
-            if(!File.Exists("LoginTable.txt")) return new Dictionary<string, string>();
-            return JsonSerializer.Deserialize<Dictionary<string,string>>(File.ReadAllText("LoginTable.txt"));
+            if(!File.Exists(LTPath))
+			{
+			  return new Dictionary<string, int>();
+			}
+            return JsonSerializer.Deserialize<Dictionary<string,int>>(File.ReadAllText("LoginTable.txt"));
         }
 	}
 }
