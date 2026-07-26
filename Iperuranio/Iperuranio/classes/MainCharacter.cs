@@ -5,10 +5,12 @@ public class MainCharacter
   public string Name {get;set;}
   public Stack<Item> Inventory {get;set;}
   public Room _currentRoom {get;set;}
+  public int Debris {get;set;}
 
   public MainCharacter(Room currentRoom)
   {
 		Name = "";
+		Debris = 0;
 		Stack<Item> Inventory = new Stack<Item>();
 		_currentRoom = currentRoom;
   }
@@ -57,14 +59,25 @@ public class MainCharacter
 	}
   }
 
-  public void Risolvi(string anagramma)
+  public void Risolvi(string anagram)
   {
 		foreach(Item item in _currentRoom.Items)
 		{
-				if( (item.anagram != null) && (new string(item.anagram.Grid).Equals(anagramma)))
-				{
-						item.anagram.SolveAnagram();
-				}
+		  if(anagram == new string(item.puzzle.Grid.ToArray()))
+		  {
+			if(!item.puzzle.solved)
+			{
+			  item.puzzle.SolveAnagram();
+			}
+			else
+			{
+			  LogFileManager.Write("Anagramma già risolto");
+			}
+		  }
+		  else
+		  {
+		    LogFileManager.Write("Anagramma non trovato");
+		  }
 		}
   }
 }

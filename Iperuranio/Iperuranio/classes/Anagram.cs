@@ -16,40 +16,27 @@ namespace Gioco
 		  {
 				anagramCount++;
 				Solution = solution;
-				Grid = new char[solution.Length];
-				char[] shuffledWord = ShuffleLetters(Solution);
-			  for(int i=0;i<solution.Length;i++)
+				Grid = new char[Solution.Length];
+				ShuffleLetters(Solution);
+		  }
+
+		  private void ShuffleLetters(string word)
+		  {
+			Random r = new Random();
+			char[] letters = word.ToCharArray();
+			r.Shuffle(letters);
+			  for(int i=0;i<Solution.Length;i++)
 				{
-					Grid[i] = shuffledWord[i];
+					Grid[i] = letters[i];
 				}
 		  }
-
-		  private char[] ShuffleLetters(string word)
-		  {
-				  Random r = new Random();
-				char[] shuffle = new char[word.Length];
-				  for(int i= 0; i<word.Length; i++)
-				  {
-						shuffle[i] = Solution[i];
-				  }
-				r.Shuffle(shuffle);
-				return shuffle;
-		  }
-
+		  
 		  public void SolveAnagram()
 		  {
-				  bool notEqual = true;
-			  while(notEqual) //mettere verde i riquadri quando è corretto
+			  while(!solved) 
 			  {	
-					  notEqual = false;
+				solved = true;
 				  Console.Clear();
-					  for(int i=0; i<Solution.Length;++i)
-					  {
-						if(Grid[i] != Solution[i]) 
-						{
-								notEqual = true;
-						}
-					  }
 				  Console.Write("\n");
 				  Console.WriteLine("x:"+x+" y:"+" char:"+currentchar+"\n");
 					  for(int i=0;i<Solution.Length;i++)
@@ -113,6 +100,11 @@ namespace Gioco
 						  }
 						  break;
 					  }
+					  case ConsoleKey.S:
+					  {
+						ShuffleLetters(Solution);
+						break;
+					  }
 					  case ConsoleKey.Escape:
 					  {
 						Console.WriteLine();
@@ -123,10 +115,15 @@ namespace Gioco
 					  break;
 					  }
 					}
+					  for(int i=0; i<Solution.Length;++i)
+					  {
+						if(Grid[i] != Solution[i]) 
+						{
+								solved = false;
+						}
+					  }
 				  }
-				  solved = true;
 				  solvedAnagramCount++;
-				  Console.WriteLine($"Progresso:{solvedAnagramCount}");
 				  AnsiConsole.Status()
 				  .Spinner(Spinner.Known.FistBump)
 				  .Start("RISOLTO",ctx =>
@@ -134,11 +131,8 @@ namespace Gioco
 					Task.Delay(2000).Wait();
 				  });
 						Console.WriteLine("Complimenti hai risolto l'anagramma!");
-						Console.WriteLine("Premi Enter per uscire");
-						while(Console.ReadKey().Key != ConsoleKey.Enter)
-						{
-						Console.WriteLine("Enter zio, enter devi premere");
-						}
+						Console.WriteLine("\nPremi qualsiasi tasto per uscire dalla schermata");
+						Console.ReadKey();
 						Console.Clear();
 			  }
 	public static bool CheckForWin()

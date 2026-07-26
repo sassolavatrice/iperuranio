@@ -2,30 +2,33 @@ namespace Gioco;
 using System.Text;
 using System.Security.Cryptography;
 
-public class LoginTable
+public static class LoginTable
 {
-  private Dictionary<string,string> Saves {get;set;}
+  public static Dictionary<string,int> Saves {get;set;}
 
-  public LoginTable()
+  public static void AddUser(string username)
   {
-   Saves = new Dictionary<string,string>();
+	if(!Saves.ContainsKey(username))
+	{
+	  Saves.Add(username,SetUniqueId());
+	}else{Console.WriteLine("Utente esiste già!");}
   }
 
-  public void AddUser(string username)
-  {
-	Saves.Add(username,GetUniqueId(username));
-  }
-
-  private static int GetUniqueId(string input)
+  public static int SetUniqueId()
   {
 	int id = -1;
 	foreach(string name in Saves.Keys)
 	{
-	  if(Saves[name] > id++){}
-	  return id;
+	  id++;
 	}
+	  return id;
   }
-  public override string ToString()
+  public static int GetUserId(string username)
+  {
+	return Saves[username];
+  }
+
+  public static string Display()
   {
 	StringBuilder sb = new StringBuilder();
 	foreach(string key in Saves.Keys)

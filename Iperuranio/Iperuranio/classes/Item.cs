@@ -6,32 +6,32 @@ public class Item
   public string Description {get;set;}
   public string Tip {get;set;}
   public int? Weigth {get;set;}
-  public Anagram anagram {get;set;}
+  public Anagram puzzle {get;set;}
 
   public Item(){}
   
-  public Item(string name, string description, int weigth = Int32.MaxValue)
+  public Item(string name, string description, string tip, int weigth = Int32.MaxValue)
   {
     Name = name;
     Description = description;
 	Weigth = weigth;
-	anagram = new Anagram(Name);
-	Tip = "Messaggio dopo aver risolto";
+	Tip = tip;
+	puzzle = new Anagram(Name);
   }
 
   public override string ToString()
   {
-		  if(anagram == null)
+		  if(puzzle == null)
 		  {
             return $"> {Name} - [{Description}]";
 		  }
-		  else if(anagram.solved)
+		  else if(puzzle.solved)
 		  {
             return $"> {Name} - [{Tip}]";
 		  }
 		  else
 		  {
-			string display = new string(anagram.Grid); 
+			string display = String.Concat(puzzle.Grid); 
 			return $"> {display} - [{Description}]";
 		  }
   }

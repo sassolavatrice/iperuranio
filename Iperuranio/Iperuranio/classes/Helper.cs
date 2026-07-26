@@ -27,7 +27,10 @@ static public class Helper
 	}
 	foreach(Item item in gameState.currentRoom.Items)
 	{
-	  allCommands.Add("focalizza " + new string(item.anagram.Grid));
+	  if(!item.puzzle.solved)
+	  {
+		allCommands.Add("focalizza " + new string(item.puzzle.Grid));
+	  }
 	}
 	  foreach(string str in allCommands) if(str.Length > Width) Width=str.Length;
 	  char[] separator = new char[Width];

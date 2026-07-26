@@ -7,18 +7,18 @@ namespace Gioco
 	  const string LTPath = @"LoginTable.txt";
       const string SavePath= @"save/.";
 	  
-        public static void SaveGame(GameState gameState,int id)
+        public static void SaveGame(GameState gameState)
         {
-            File.WriteAllText(SavePath + id.ToString(),JsonSerializer.Serialize(gameState));
+            File.WriteAllText(SavePath + GameEngine.sessionID.ToString(),JsonSerializer.Serialize(gameState));
         }
 
-        public static GameState LoadGame(int id)
+        public static GameState LoadGame()
         {
-            if(!File.Exists(SavePath + id.ToString()))
+            if(!File.Exists(SavePath + GameEngine.sessionID.ToString()))
 			{
 			  return GameEngine.GenerateNewGame();
 			}
-            return JsonSerializer.Deserialize<GameState>(File.ReadAllText(SavePath + id.ToString()));
+            return JsonSerializer.Deserialize<GameState>(File.ReadAllText(SavePath + GameEngine.sessionID.ToString()));
         }
 
         public static Dictionary<string,int> LoadLoginTable()

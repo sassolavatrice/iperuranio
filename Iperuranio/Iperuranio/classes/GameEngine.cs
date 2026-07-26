@@ -3,53 +3,61 @@ namespace Gioco
    public class GameEngine
     { 
         public static GameState gameState {get;set;}
-		public static Dictionary<string,int> loginTable {get;set;}
+		public static int sessionID = 0;
 
 		public GameEngine()
 		{
-		  loginTable = SaveLoadManager.LoadLoginTable();
-		  while(Authentication(out int id));
-		  gameState = SaveLoadManager.LoadGame(id);
+		  LoginTable.Saves = SaveLoadManager.LoadLoginTable();
+		  while(Authentication());
+		  if(sessionID != 0)
+		  { 
+		    gameState = SaveLoadManager.LoadGame();
+		  } else {Console.WriteLine("è stato un piacere.");}
 		}
 
-        public static bool Authentication(out int ID)
+        public static bool Authentication()
         {
-			 Console.WriteLine("Enter username: ");
+			 Console.WriteLine("Benvenuto nel login (digitare aiuto per vedere comandi disponibili) ");
 			 string[] arguments = null;
 			  arguments = Console.ReadLine().Trim().Split();
             switch (arguments[0].ToLower())
             {            
 			  case "aiuto":
                 Console.WriteLine("\"add\" <nickname> to create save slot\n"+
+												"\"utenti\" per vedere gli slot di salvataggio\n" +
 											   "\"resume\" <nickname> to resume\n"+
-                                               "\"exit\" to leave");
+                                               "\"esci\" to leave");
+				return true;
+			  case "utenti":
+				Console.WriteLine(LoginTable.Display());
 				return true;
 			  case "add":
-				loginTable.Add(arguments[1],);
+				LoginTable.AddUser(arguments[1]);
+				return true;
+			  case "resume":
+				GameEngine.sessionID = LoginTable.GetUserId(arguments[1]);
 				return false;
-				case "resume"
-				
 			  case "esci":
 				return false;
 			  default:
 				Console.WriteLine("comando non riconosciuto");
 				return true;
             }
-		  }
-		public static QuitGame()
+		}
+		public static void QuitGame()
 		{
-		  SaveLoadManager.SaveGame(GameEngine.gameState, GameEngine.id);
+		  SaveLoadManager.SaveGame(GameEngine.gameState);
 		  Program.endGame = true;
 		}
 
 		public static GameState GenerateNewGame()
 		{
 		  GameState gameState = new GameState();
-    //Item blu = new Item("blu", "Nel ... dipinto di ...");
-    //Item bianco = new Item("bianco", "Siamo sicuri sia un colore?");
-    //Item petrolio = new Item("petrolio", "Sfumatura di verde, piace agli Stati Uniti");
-    //Item fieno = new Item("fieno", "lo mangiano i cavalli");
-    //Item cowboy = new Item("cowboy", "YEEEEEEHAAAW");
+    Item blu = new Item("blu", "Nel ... dipinto di ...","");
+    Item bianco = new Item("bianco", "Siamo sicuri sia un colore?","");
+    Item petrolio = new Item("petrolio", "Sfumatura di verde, piace agli Stati Uniti","");
+    Item fieno = new Item("fieno", "lo mangiano i cavalli","");
+    Item cowboy = new Item("cowboy", "YEEEEEEHAAAW","");
 
     gameState.book = new Book();
 
@@ -69,18 +77,18 @@ namespace Gioco
     gameState.Rooms[4].addExit("ovest",gameState.Rooms[3]);
    
 
-    // creo oggetti
-    Baforb baforb = new Baforb(gameState);
-    Tile a = new Tile('a');
-    //Debris barra = new Debris('\\');
+    // creo NPC
+    NPC baforb = new NPC("Baforb", "un tipico fabBro");
+	NPC smeagol = new NPC("Smeagol", "mo te ciulo le lettere");
 
     // aggiungo oggetti nella stanza
-    gameState.Rooms[0].addItem(new Item("Tutorial", "seleziona la lettera, spostala e risolvi questo anagramma"));
-    //gameState.Rooms[1].addItem(barra);
-    //gameState.Rooms[3].addItem(bianco);
-    //gameState.Rooms[3].addItem(petrolio);
-    //gameState.Rooms[4].addItem(fieno);
-    //gameState.Rooms[4].addItem(cowboy);
+    gameState.Rooms[0].addItem(new Item("tutorial", "Risolvi il tutorial, prego.","Complimenti! Hai risolto il tutorial"));
+	gameState.Rooms.Last().addItem(baforb);
+	gameState.Rooms.Last().addItem(smeagol);
+    gameState.Rooms[3].addItem(bianco);
+    gameState.Rooms[3].addItem(petrolio);
+    gameState.Rooms[4].addItem(fieno);
+    gameState.Rooms[4].addItem(cowboy);
 
 
 
@@ -90,9 +98,5 @@ namespace Gioco
     gameState.mainCharacter = new MainCharacter(gameState.currentRoom);
 	return gameState;
         }
-	public static void StartGame()
-	{
-	  Console.WriteLine("avviamento gioco...");
-	}  
   }
 }

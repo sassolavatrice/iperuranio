@@ -8,7 +8,7 @@ class Tile : Item
     Name = letter.ToString();
     Weigth = 1;
     Description = "Un tassello con suscritto una lettera, chissà a cosa serve"; 
-	anagram = null;
+	puzzle = null;
   }
 
   //static public void spawnTiles()

@@ -79,6 +79,11 @@ public class Room
     }
 	Console.WriteLine();
   }
+
+  public override string ToString()
+  {
+	return $"\t\t{this.Name}\n----------------------------------\n{this.Description}";
+  }
     
 
   
