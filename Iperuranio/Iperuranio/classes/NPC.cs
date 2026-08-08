@@ -1,5 +1,6 @@
 namespace Gioco;
 
+  [Serializable]
 public class NPC : Item
 {
   static public Room CurrentRoom{get;set;}

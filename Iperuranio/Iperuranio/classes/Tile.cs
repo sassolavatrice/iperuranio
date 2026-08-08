@@ -1,5 +1,6 @@
 namespace Gioco;
 
+[Serializable]
 class Tile : Item
 {
   char _letter = ' ';

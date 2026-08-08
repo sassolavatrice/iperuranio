@@ -2,10 +2,10 @@ using Spectre.Console;
 
 namespace Gioco
 {
+  [Serializable]
 		public class Anagram
 		{
-		  static public int anagramCount = 0;
-		  static public int solvedAnagramCount = 0;
+		  static public int anagramCount {get;set;}
 		  public string Solution {get;set;}
 		  public char[] Grid {get;set;}
 		  int x=0;
@@ -14,7 +14,7 @@ namespace Gioco
 
 		  public Anagram(string solution)
 		  {
-				anagramCount++;
+			anagramCount++;
 				Solution = solution;
 				Grid = new char[Solution.Length];
 				ShuffleLetters(Solution);
@@ -123,7 +123,6 @@ namespace Gioco
 						}
 					  }
 				  }
-				  solvedAnagramCount++;
 				  AnsiConsole.Status()
 				  .Spinner(Spinner.Known.FistBump)
 				  .Start("RISOLTO",ctx =>
@@ -135,16 +134,5 @@ namespace Gioco
 						Console.ReadKey();
 						Console.Clear();
 			  }
-	public static bool CheckForWin()
-	{
-	  if(anagramCount == solvedAnagramCount)
-	  {
-	  Console.Clear();
-	  Console.WriteLine("Hai risolto tutti gli anagrammi!");
-	  Console.WriteLine("Premi qualsiasi tasto per tornare alla schermata principale");
-	  Console.ReadKey();
-	  return true;
-	  }else{return false;}
-	}
   }
 }

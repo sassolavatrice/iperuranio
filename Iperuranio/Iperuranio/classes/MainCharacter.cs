@@ -1,5 +1,6 @@
 namespace Gioco;
 
+  [Serializable]
 public class MainCharacter
 {
   public string Name {get;set;}
@@ -69,14 +70,7 @@ public class MainCharacter
 			{
 			  item.puzzle.SolveAnagram();
 			}
-			else
-			{
-			  LogFileManager.Write("Anagramma già risolto");
-			}
-		  }
-		  else
-		  {
-		    LogFileManager.Write("Anagramma non trovato");
+		    Console.WriteLine("Anagramma non trovato");
 		  }
 		}
   }

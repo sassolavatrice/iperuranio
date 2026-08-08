@@ -5,6 +5,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="3.3.2" />
     <PackageReference Include="Spectre.Console" Version="0.57.2" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.10" />
   </ItemGroup>
 
 </Project>

@@ -2,10 +2,8 @@ namespace Gioco;
 
 static class GameShell
 {
-
   public static void getCommand(GameState gameState)
   {
-    
     Console.WriteLine("Inserisci un comando");
    string[] arguments = null;
    do{ 
@@ -54,11 +52,17 @@ static class GameShell
 		if(gameState.book != null)
 		Console.WriteLine(gameState.book.ToString());
 		break;
+	 case "menu":
+		Console.Clear();
+		Program.endGame = true;
+		GameEngine.SaveGame();
+		break;
      case "aiuto":
 		Helper.Switch();
         break;
      case "esci":
 		Program.endGame = true;
+		Program.endApp = true;
 		return;
      default:
         Console.WriteLine("Comando non riconosciuto");

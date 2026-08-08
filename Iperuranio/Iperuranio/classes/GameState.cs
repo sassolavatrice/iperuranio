@@ -1,13 +1,17 @@
 namespace Gioco;
 
+[Serializable]
 public class GameState
 {
-  public List<Room> Rooms = new List<Room>();
-  public Room? currentRoom {get;set;}
-  public MainCharacter mainCharacter {get;set;}
-  public Book book {get;set;}
+  public List<Room> Rooms {get; set;}
+  public Room currentRoom {get; set;}
+  public MainCharacter mainCharacter {get; set;}
+  public Book book {get; set;}
 
- 
+ public GameState()
+ {
+	Rooms = new List<Room>();
+ }
 
   public void MoveTo(string direction)
   {
@@ -54,4 +58,27 @@ public class GameState
       Console.WriteLine("non esiste");
     }
   }
+	public bool CheckForWin()
+	{
+	  Anagram.anagramCount = 0;
+	  int solvedAnagramCount = 0;
+	  foreach(Room r in Rooms)
+	  {
+		foreach(Item i in r.Items)
+		{
+		  Anagram.anagramCount++;
+		  if (i.puzzle.solved) solvedAnagramCount++;
+		}
+	  }
+	  if(Anagram.anagramCount == solvedAnagramCount)
+	  {
+	  Console.Clear();
+	  Console.WriteLine($"totale Anagrammi: {Anagram.anagramCount} anagrammi Risolti: {solvedAnagramCount}");
+	  Console.WriteLine("Hai risolto tutti gli anagrammi!");
+	  Console.WriteLine("Premi qualsiasi tasto per tornare alla schermata principale");
+	  Console.ReadKey();
+	  return true;
+	  }else{return false;}
+	}
 }
+

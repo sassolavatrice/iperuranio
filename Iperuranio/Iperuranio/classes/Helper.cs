@@ -1,5 +1,6 @@
 namespace Gioco;
 
+  [Serializable]
 static public class Helper
 {
   static public List<string> mainCommands = new List<string>{"menu","esci"};

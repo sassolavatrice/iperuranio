@@ -1,5 +1,6 @@
 namespace Gioco;
 
+[Serializable]
 public class Room
 {
   private string? _name;

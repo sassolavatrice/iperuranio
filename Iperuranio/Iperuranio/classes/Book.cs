@@ -1,5 +1,6 @@
 namespace Gioco
 {
+  [Serializable]
 		public class Book
 		{
 				public Dictionary<Item,bool> Indovinelli {get; set;}
@@ -11,8 +12,7 @@ namespace Gioco
 
 				public override string ToString()
 				{
-						string Page = "Neee";
-						return Page;
+						return "Ne";
 				}
 		}
 }

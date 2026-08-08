@@ -1,55 +1,54 @@
+
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace Gioco
 {
-   public class GameEngine
+  [Serializable]
+   public static class GameEngine
     { 
+	    public const string savePath = "Dipendenti.dat";
         public static GameState gameState {get;set;}
-		public static int sessionID = 0;
 
-		public GameEngine()
+		static public void SaveGame()
 		{
-		  LoginTable.Saves = SaveLoadManager.LoadLoginTable();
-		  while(Authentication());
-		  if(sessionID != 0)
-		  { 
-		    gameState = SaveLoadManager.LoadGame();
-		  } else {Console.WriteLine("è stato un piacere.");}
+		  using (var stream = File.Open(savePath, FileMode.OpenOrCreate))
+		  {
+			  var serializer = new BinaryFormatter();
+			  serializer.Serialize(stream, LoginTable.Saves);
+		  }
 		}
 
-        public static bool Authentication()
-        {
-			 Console.WriteLine("Benvenuto nel login (digitare aiuto per vedere comandi disponibili) ");
-			 string[] arguments = null;
-			  arguments = Console.ReadLine().Trim().Split();
-            switch (arguments[0].ToLower())
-            {            
-			  case "aiuto":
-                Console.WriteLine("\"add\" <nickname> to create save slot\n"+
-												"\"utenti\" per vedere gli slot di salvataggio\n" +
-											   "\"resume\" <nickname> to resume\n"+
-                                               "\"esci\" to leave");
-				return true;
-			  case "utenti":
-				Console.WriteLine(LoginTable.Display());
-				return true;
-			  case "add":
-				LoginTable.AddUser(arguments[1]);
-				return true;
-			  case "resume":
-				GameEngine.sessionID = LoginTable.GetUserId(arguments[1]);
-				return false;
-			  case "esci":
-				return false;
-			  default:
-				Console.WriteLine("comando non riconosciuto");
-				return true;
-            }
-		}
-		public static void QuitGame()
-		{
-		  SaveLoadManager.SaveGame(GameEngine.gameState);
-		  Program.endGame = true;
-		}
 
+        //public static bool Authentication()
+        //{
+		//	 Console.WriteLine("Benvenuto nel login (digitare aiuto per vedere comandi disponibili) ");
+		//	 string[] arguments = null;
+		//	  arguments = Console.ReadLine().Trim().Split();
+        //    switch (arguments[0].ToLower())
+        //    {            
+		//	  case "aiuto":
+        //        Console.WriteLine("\"add\" <nickname> to create save slot\n"+
+		//										"\"utenti\" per vedere gli slot di salvataggio\n" +
+		//									   "\"resume\" <nickname> to resume\n"+
+        //                                       "\"esci\" to leave");
+		//		return true;
+		//	  case "utenti":
+		//		Console.WriteLine(LoginTable.Display());
+		//		return true;
+		//	  case "add":
+		//		LoginTable.AddUser(arguments[1]);
+		//		return true;
+		//	  case "resume":
+		//		GameEngine.sessionID = LoginTable.GetUserId(arguments[1]);
+		//		return false;
+		//	  case "esci":
+		//		return false;
+		//	  default:
+		//		Console.WriteLine("comando non riconosciuto");
+		//		return true;
+        //    }
+		//}
+		
 		public static GameState GenerateNewGame()
 		{
 		  GameState gameState = new GameState();
@@ -59,13 +58,18 @@ namespace Gioco
     Item fieno = new Item("fieno", "lo mangiano i cavalli","");
     Item cowboy = new Item("cowboy", "YEEEEEEHAAAW","");
 
-    gameState.book = new Book();
+   Room primaStanza =  new Room("???????????", "Dove sono?");
+    Room secondaStanza =  new Room("Gattabuia", "Sei circondato da mattonelle e sbare e metallo");
+    Room terzaStanza =  new Room("Gattahiara", "Sei circondato da mattoni e sbarre di metallo");
+    Room quartoStanza =  new Room("Tavolozza", "È tutto così....colorato");//blu nel ... dipinto di ... bianco siamo sicuri sia un colore,petrolio sfumatura di verde, piace agli stati uniti
+    Room quintaStanza =  new Room("Stalla", "Cavalli, ma non solo");//fieno lo mangiano i cavalli, ferro quello di cavallo porta fortuna, cowboy yeehaw
 
-    gameState.Rooms.Add(new Room("???????????", "Dove sono?"));
-    gameState.Rooms.Add(new Room("Gattabuia", "Sei circondato da mattonelle e sbare e metallo"));
-    gameState.Rooms.Add(new Room("Gattahiara", "Sei circondato da mattoni e sbarre di metallo"));
-    gameState.Rooms.Add(new Room("Tavolozza", "È tutto così....colorato"));//blu nel ... dipinto di ... bianco siamo sicuri sia un colore,petrolio sfumatura di verde, piace agli stati uniti
-    gameState.Rooms.Add(new Room("Stalla", "Cavalli, ma non solo"));//fieno lo mangiano i cavalli, ferro quello di cavallo porta fortuna, cowboy yeehaw
+
+	gameState.Rooms.Add(primaStanza);
+	gameState.Rooms.Add(secondaStanza);
+	gameState.Rooms.Add(terzaStanza);
+	gameState.Rooms.Add(quartoStanza);
+	gameState.Rooms.Add(quintaStanza);
 
     gameState.Rooms[0].addExit("nord", gameState.Rooms[1]);
     gameState.Rooms[1].addExit("sud", gameState.Rooms[0]);
