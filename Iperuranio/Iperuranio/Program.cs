@@ -9,7 +9,8 @@ static public class Program
    while (!endGame)
     {
       Console.Clear();
-      Console.WriteLine(GameEngine.gameState.currentRoom.ToString());
+      Console.WriteLine(GameEngine.gameState.currentRoom.Name);
+      Console.WriteLine(GameEngine.gameState.currentRoom.Description);
       GameEngine.gameState.currentRoom.PrintItems();
 	  Helper.Reload(GameEngine.gameState);
       Helper.Display();
