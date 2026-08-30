@@ -1,77 +1,51 @@
 namespace Gioco;
 
-  [Serializable]
+[Serializable]
 public class MainCharacter
 {
-  public string Name {get;set;}
-  public Stack<Item> Inventory {get;set;}
-  public Room _currentRoom {get;set;}
-  public int Debris {get;set;}
+	public string _name { get; set; }
+	public Inventory _inventory { get; set; }
+	public Room _currentRoom { get; set; }
+	public int Debris { get; set; }
 
-  public MainCharacter(Room currentRoom)
-  {
-		Name = "";
+	public MainCharacter(Room currentRoom)
+	{
+		_name = "";
 		Debris = 0;
-		Stack<Item> Inventory = new Stack<Item>();
+		_inventory = new Inventory();
 		_currentRoom = currentRoom;
-  }
-
-  public void InteractInventory()
-  {
-		int current;
-		ConsoleKeyInfo MyKey;
-    do
-    {
-			current = 0;
-			MyKey = Console.ReadKey();
-			switch (MyKey.Key)
-			{
-					case ConsoleKey.W:
-							if(current-1 > 0)
-								current--;
-							break;
-					case ConsoleKey.S:
-							if(current+1 < Inventory.Count)
-									current++;
-							break;
-			}
-			var currentItem = Inventory.ElementAt(current);
-      foreach(Item item in Inventory)
-      {
-		if(item == currentItem)
-        Console.WriteLine("> " + item.ToString());
-	  }
-    } while(MyKey.Key != ConsoleKey.Escape);
-  }
-
-  public void showInventory()
-  {
-    Console.WriteLine("Inventario:");
-    if(Inventory.Count == 0)
-    {
-      Console.WriteLine("L'inventario è vuoto!");
-    }
-    else
-    {
-      foreach(Item item in Inventory)
-      {
-        Console.WriteLine(item.ToString());
-	  }
 	}
-  }
 
-  public void Risolvi(string anagram)
-  {
-		foreach(Item item in _currentRoom.Items)
+	public void showInventory()
+	{
+		Console.Clear();
+		Console.WriteLine("Inventario:");
+		if (_inventory.Count == 0)
 		{
-		  if(anagram == new string(item.puzzle.Grid.ToArray()))
-		  {
-			if(!item.puzzle.solved)
-			{
-			  item.puzzle.SolveAnagram();
-			}
-		    Console.WriteLine("Anagramma non trovato");
-		  }
+			Console.WriteLine("L'inventario è vuoto!");
 		}
-  }
+		else
+		{
+			foreach (Item item in _inventory.items)
+			{
+				Console.WriteLine(item.ToString());
+			}
+		}
+		Console.ReadKey();
+	}
+
+	public void Risolvi(string anagram)
+	{
+		foreach (Item item in _currentRoom.Items)
+		{
+			if (anagram == new string(item.puzzle.Grid.ToArray()))
+			{
+				if (!item.puzzle.solved)
+				{
+					item.puzzle.SolveAnagram();
+				}
+				Console.WriteLine("Anagramma non trovato");
+			}
+		}
+	}
 }
