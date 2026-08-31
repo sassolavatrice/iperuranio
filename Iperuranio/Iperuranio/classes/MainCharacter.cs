@@ -36,16 +36,17 @@ public class MainCharacter
 
 	public void Risolvi(string anagram)
 	{
+		bool found = false;
 		foreach (Item item in _currentRoom.Items)
 		{
+			if (item.puzzle == null) continue;
 			if (anagram == new string(item.puzzle.Grid.ToArray()))
 			{
-				if (!item.puzzle.solved)
-				{
-					item.puzzle.SolveAnagram();
-				}
-				Console.WriteLine("Anagramma non trovato");
+				found = true;
+				if (!item.puzzle.solved) item.puzzle.SolveAnagram();
+				break;
 			}
 		}
+		if (!found) Console.WriteLine("Anagramma non trovato");
 	}
 }

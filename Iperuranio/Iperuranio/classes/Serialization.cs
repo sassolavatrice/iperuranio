@@ -71,7 +71,7 @@ public static class Serializator
 			{
 				case 1:
 					{
-						gameState = GameEngine.GenerateNewGame();
+						gameState = Hub.NewGame();
 						Console.WriteLine("inserire username: ");
 						string username = Console.ReadLine();
 						Console.Clear();
